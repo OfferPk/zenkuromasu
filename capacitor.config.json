@@ -1,0 +1,6 @@
+{
+  "appId": "pk.offer.zenkuromasu",
+  "appName": "ZenKuromasu",
+  "webDir": "www",
+  "bundledWebRuntime": false
+}

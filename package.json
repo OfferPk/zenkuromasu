@@ -1,0 +1,28 @@
+{
+  "name": "zenkuromasu",
+  "version": "1.0.0",
+  "description": "ZenKuromasu: Calm, meditative Japanese Kuromasu (Kurodoko / 黒どこ) sumi ink stone logic puzzle",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "node --test test/engine.test.js",
+    "build": "node scripts/build.js"
+  },
+  "keywords": [
+    "kuromasu",
+    "kurodoko",
+    "nikoli",
+    "logic-puzzle",
+    "zen",
+    "sumi-ink",
+    "pwa",
+    "capacitor",
+    "offline-game"
+  ],
+  "author": "OfferPk",
+  "license": "MIT",
+  "devDependencies": {
+    "@capacitor/android": "^6.2.0",
+    "@capacitor/cli": "^6.2.0",
+    "@capacitor/core": "^6.2.0"
+  }
+}

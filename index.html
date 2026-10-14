@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>ZenKuromasu - Serene Japanese Sumi Ink Logic</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
+  <meta name="theme-color" content="#181c19">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header>
+      <div class="brand">
+        <div class="brand-icon">黒</div>
+        <div>
+          <h1 class="brand-title">ZenKuromasu</h1>
+          <span class="brand-subtitle">黒どこ • Sumi Ink Sightlines</span>
+        </div>
+      </div>
+      <div class="header-controls">
+        <button id="btn-sound" class="icon-btn" title="Toggle Sound (M)" aria-label="Toggle Sound">🔊</button>
+        <button id="btn-rules" class="icon-btn" title="How to Play" aria-label="Rules">?</button>
+        <button id="btn-levels" class="icon-btn" title="Chamber Select" aria-label="Select Level">☰</button>
+      </div>
+    </header>
+
+    <!-- Level Bar & Counters -->
+    <div class="level-bar">
+      <div class="level-meta">
+        <span id="pack-name" class="pack-name">Sumi Garden</span>
+        <span id="level-name" class="level-name">Level 1 (5×5)</span>
+      </div>
+      <div class="level-stats">
+        <div class="stat-item" title="Black stones placed">
+          <span class="stat-label">Stones</span>
+          <span id="stat-black" class="stat-value">0</span>
+        </div>
+        <div class="stat-item" title="Confirmed white path dots">
+          <span class="stat-label">Dots</span>
+          <span id="stat-white" class="stat-value">0</span>
+        </div>
+        <div class="stat-item" title="Sightline clues satisfied">
+          <span class="stat-label">Clues</span>
+          <span id="stat-clues" class="stat-value">0/5</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mode Selector Bar (Black Stone / White Dot) -->
+    <div class="mode-bar">
+      <button id="mode-stone" class="mode-btn active" data-mode="black" title="Place Black Ink Stone">
+        <span class="mode-dot stone-dot"></span>
+        <span>Sumi Stone</span>
+      </button>
+      <button id="mode-dot" class="mode-btn" data-mode="white" title="Place Confirmed White Path">
+        <span class="mode-dot path-dot"></span>
+        <span>Garden Dot</span>
+      </button>
+    </div>
+
+    <!-- Interactive Japanese Grid Board -->
+    <main class="board-viewport">
+      <div class="board-container">
+        <svg id="board-svg" viewBox="0 0 500 500" preserveAspectRatio="xMidYMid meet"></svg>
+      </div>
+    </main>
+
+    <!-- Deductive Hint Banner -->
+    <div id="hint-banner" class="hint-banner hidden">
+      <span class="hint-icon">💡</span>
+      <span id="hint-text" class="hint-text"></span>
+      <button id="btn-close-hint" class="hint-close" aria-label="Dismiss Hint">✕</button>
+    </div>
+
+    <!-- Toolbar Controls -->
+    <footer class="controls-bar">
+      <button id="btn-undo" class="action-btn" title="Undo Move (U)">
+        <span class="btn-icon">↺</span>
+        <span class="btn-label">Undo</span>
+      </button>
+      <button id="btn-reset" class="action-btn" title="Reset Board (R)">
+        <span class="btn-icon">🗑️</span>
+        <span class="btn-label">Reset</span>
+      </button>
+      <button id="btn-hint" class="action-btn" title="Deductive Hint (H)">
+        <span class="btn-icon">💡</span>
+        <span class="btn-label">Hint</span>
+      </button>
+      <button id="btn-prev" class="action-btn" title="Previous Chamber (Left Arrow)">
+        <span class="btn-icon">◀</span>
+        <span class="btn-label">Prev</span>
+      </button>
+      <button id="btn-next" class="action-btn" title="Next Chamber (Right Arrow)">
+        <span class="btn-icon">▶</span>
+        <span class="btn-label">Next</span>
+      </button>
+    </footer>
+  </div>
+
+  <!-- Level Select Modal -->
+  <div id="modal-levels" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2 class="modal-title">Select Chamber</h2>
+        <button id="close-levels" class="modal-close">✕</button>
+      </div>
+      <div class="pack-tabs" id="pack-tabs"></div>
+      <div class="modal-body">
+        <div class="level-grid" id="level-grid"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rules Modal -->
+  <div id="modal-rules" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2 class="modal-title">Zen of Kuromasu</h2>
+        <button id="close-rules" class="modal-close">✕</button>
+      </div>
+      <div class="modal-body rules-content">
+        <div class="rule-card">
+          <div class="rule-step">1</div>
+          <div class="rule-text">
+            <strong>Line of Sight Clues</strong>
+            <p>Each circled number indicates how many white cells can be seen horizontally and vertically, including itself. Black stones block line of sight.</p>
+          </div>
+        </div>
+        <div class="rule-card">
+          <div class="rule-step">2</div>
+          <div class="rule-text">
+            <strong>No Adjacent Black Stones</strong>
+            <p>Black stones may never touch orthogonally (up, down, left, right). Diagonal contact is permitted.</p>
+          </div>
+        </div>
+        <div class="rule-card">
+          <div class="rule-step">3</div>
+          <div class="rule-text">
+            <strong>Continuous White Path</strong>
+            <p>All white cells (gardens and numbered clues) must form a single, unbroken orthogonal network. No isolated pools.</p>
+          </div>
+        </div>
+        <div class="rule-card">
+          <div class="rule-step">4</div>
+          <div class="rule-text">
+            <strong>Clue Circles Are Never Black</strong>
+            <p>A cell with a number is permanently white.</p>
+          </div>
+        </div>
+        <div class="rule-tips">
+          <h4>Meditative Controls</h4>
+          <ul>
+            <li><strong>Tap:</strong> Cycles cell: Empty ➔ Black Stone ➔ White Dot ➔ Empty.</li>
+            <li><strong>Toolbar:</strong> Switch between Stone and Dot mode for quick single-tap placement.</li>
+            <li><strong>Visual Guidance:</strong> Clue turns green when visibility is satisfied, gold when pending, and red when violated.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-rules-start" class="primary-btn">Begin Meditation</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Win Modal -->
+  <div id="modal-win" class="modal-overlay">
+    <div class="modal-box win-modal">
+      <div class="win-banner">
+        <div class="win-icon">💮</div>
+        <h2 class="win-title">Sightlines Harmonized</h2>
+        <p class="win-subtitle" id="win-level-name">Sumi Garden • Level 1</p>
+      </div>
+      <div class="win-stats">
+        <div class="win-stat-row">
+          <span>Black Stones Placed:</span>
+          <strong id="win-stones-count">4</strong>
+        </div>
+        <div class="win-stat-row">
+          <span>White Network:</span>
+          <strong style="color: #78b885;">Continuous & Connected</strong>
+        </div>
+        <div class="win-stat-row">
+          <span>Clue Sightlines:</span>
+          <strong style="color: #e2b053;">100% Satisfied</strong>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-replay" class="secondary-btn">Review Layout</button>
+        <button id="btn-win-next" class="primary-btn">Next Chamber ▶</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="kuromasu-engine.js"></script>
+  <script src="levels.js"></script>
+  <script src="audio.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

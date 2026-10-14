@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- Background Gradient -->
+    <radialGradient id="bgGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#242b2e" />
+      <stop offset="70%" stop-color="#141719" />
+      <stop offset="100%" stop-color="#0b0d0e" />
+    </radialGradient>
+
+    <!-- Stone Gradient -->
+    <radialGradient id="stoneGrad" cx="38%" cy="32%" r="65%">
+      <stop offset="0%" stop-color="#474f54" />
+      <stop offset="45%" stop-color="#22272a" />
+      <stop offset="100%" stop-color="#0d0f10" />
+    </radialGradient>
+
+    <!-- Gold Accent Gradient -->
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5e1a4" />
+      <stop offset="50%" stop-color="#d4af37" />
+      <stop offset="100%" stop-color="#9a7b20" />
+    </linearGradient>
+
+    <!-- Drop Shadow Filter -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.65" />
+    </filter>
+
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad)" />
+
+  <!-- Outer Zen Ring -->
+  <circle cx="256" cy="256" r="224" fill="none" stroke="url(#goldGrad)" stroke-width="3" stroke-opacity="0.3" stroke-dasharray="8 12" />
+  <circle cx="256" cy="256" r="212" fill="none" stroke="url(#goldGrad)" stroke-width="1.5" stroke-opacity="0.5" />
+
+  <!-- Sightline Ray Grid Lines -->
+  <!-- Horizontal Sightline Ray -->
+  <line x1="84" y1="256" x2="428" y2="256" stroke="url(#goldGrad)" stroke-width="4" stroke-opacity="0.65" stroke-linecap="round" />
+  <!-- Vertical Sightline Ray -->
+  <line x1="256" y1="84" x2="256" y2="428" stroke="url(#goldGrad)" stroke-width="4" stroke-opacity="0.65" stroke-linecap="round" />
+
+  <!-- Sightline White Dots -->
+  <!-- Horizontal dots -->
+  <circle cx="120" cy="256" r="14" fill="#f0eee9" filter="url(#shadow)" />
+  <circle cx="180" cy="256" r="14" fill="#f0eee9" filter="url(#shadow)" />
+  <circle cx="332" cy="256" r="14" fill="#f0eee9" filter="url(#shadow)" />
+  <circle cx="392" cy="256" r="14" fill="#f0eee9" filter="url(#shadow)" />
+
+  <!-- Vertical dots -->
+  <circle cx="256" cy="120" r="14" fill="#f0eee9" filter="url(#shadow)" />
+  <circle cx="256" cy="180" r="14" fill="#f0eee9" filter="url(#shadow)" />
+  <circle cx="256" cy="332" r="14" fill="#f0eee9" filter="url(#shadow)" />
+  <circle cx="256" cy="392" r="14" fill="#f0eee9" filter="url(#shadow)" />
+
+  <!-- Center Sumi Ink Stone -->
+  <circle cx="256" cy="256" r="82" fill="url(#stoneGrad)" stroke="url(#goldGrad)" stroke-width="4" filter="url(#shadow)" />
+
+  <!-- Inner Concentric Circle -->
+  <circle cx="256" cy="256" r="70" fill="none" stroke="url(#goldGrad)" stroke-width="1.5" stroke-opacity="0.4" stroke-dasharray="4 4" />
+
+  <!-- Japanese Kanji "黒" (Black) in Calligraphy -->
+  <g fill="url(#goldGrad)" filter="url(#glow)">
+    <text x="256" y="278" font-family="'Noto Serif JP', 'Yu Mincho', serif, sans-serif" font-size="64" font-weight="900" text-anchor="middle">黒</text>
+  </g>
+
+  <!-- Number Clue Pill at Bottom -->
+  <rect x="206" y="372" width="100" height="34" rx="17" fill="#1b2024" stroke="url(#goldGrad)" stroke-width="2" />
+  <text x="256" y="396" font-family="'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="bold" fill="#f5e1a4" text-anchor="middle">KURO</text>
+</svg>

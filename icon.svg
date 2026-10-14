@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#181c19"/>
+      <stop offset="100%" stop-color="#0f1210"/>
+    </linearGradient>
+    <linearGradient id="stone-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2a332c"/>
+      <stop offset="100%" stop-color="#0e1310"/>
+    </linearGradient>
+    <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5cc70"/>
+      <stop offset="100%" stop-color="#c99732"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" rx="112" fill="url(#bg-grad)"/>
+
+  <!-- Outer Wooden Board Frame -->
+  <rect x="44" y="44" width="424" height="424" rx="36" fill="#202722" stroke="#3b483e" stroke-width="8" filter="url(#shadow)"/>
+
+  <!-- Inner Rice Paper Mat -->
+  <rect x="70" y="70" width="372" height="372" rx="20" fill="#242c26" stroke="rgba(255,255,255,0.08)" stroke-width="2"/>
+
+  <!-- Raycast Sightline Glow (Vertical & Horizontal crossing at center clue) -->
+  <rect x="232" y="90" width="48" height="332" rx="8" fill="rgba(226, 176, 83, 0.16)"/>
+  <rect x="90" y="232" width="332" height="48" rx="8" fill="rgba(226, 176, 83, 0.16)"/>
+
+  <!-- Black Sumi Stones (Top-Right, Bottom-Left) -->
+  <!-- Top Right Stone -->
+  <circle cx="370" cy="142" r="44" fill="url(#stone-grad)" stroke="#111" stroke-width="4" filter="url(#shadow)"/>
+  <ellipse cx="356" cy="128" rx="14" ry="8" fill="rgba(255,255,255,0.18)" transform="rotate(-30 356 128)"/>
+
+  <!-- Bottom Left Stone -->
+  <circle cx="142" cy="370" r="44" fill="url(#stone-grad)" stroke="#111" stroke-width="4" filter="url(#shadow)"/>
+  <ellipse cx="128" cy="356" rx="14" ry="8" fill="rgba(255,255,255,0.18)" transform="rotate(-30 128 356)"/>
+
+  <!-- Confirmed White Path Dots (Top-Left, Bottom-Right) -->
+  <circle cx="142" cy="142" r="16" fill="#78b885" opacity="0.85"/>
+  <circle cx="370" cy="370" r="16" fill="#78b885" opacity="0.85"/>
+
+  <!-- Center Clue Circle (Shows "7" sightline) -->
+  <circle cx="256" cy="256" r="54" fill="#1b231d" stroke="url(#gold-grad)" stroke-width="6" filter="url(#shadow)"/>
+  <text x="256" y="272" font-family="-apple-system, sans-serif" font-size="48" font-weight="900" fill="#f0ebe1" text-anchor="middle">7</text>
+
+  <!-- Japanese Kanji Seal for Kuro (黒) Top-Left -->
+  <rect x="76" y="76" width="38" height="38" rx="8" fill="#8f2d34" opacity="0.85"/>
+  <text x="95" y="103" font-family="serif, 'Hiragino Mincho ProN'" font-size="22" font-weight="bold" fill="#fbf0d9" text-anchor="middle">黒</text>
+</svg>

@@ -1,0 +1,18 @@
+{
+  "name": "ZenKuromasu - Sumi Ink Logic",
+  "short_name": "ZenKuromasu",
+  "description": "Serene Japanese Kuromasu (黒どこ / Where is Black) offline logic puzzle. Discover hidden black stones using line-of-sight sightlines.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#181c19",
+  "theme_color": "#181c19",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

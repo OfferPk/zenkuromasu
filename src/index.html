@@ -3,10 +3,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>ZenKuromasu - Sumi Ink Logic</title>
   <meta name="description" content="Serene Japanese Kuromasu (Kurodoko / 黒どこ) offline logic puzzle. Uncover hidden black stones using line-of-sight number clues.">
-  <meta name="theme-color" content="#141719">
+  <meta name="theme-color" content="#101411">
   <link rel="manifest" href="manifest.json">
   <link rel="icon" type="image/svg+xml" href="icon.svg">
   <link rel="apple-touch-icon" href="icon.svg">
@@ -35,6 +35,7 @@
       <div class="level-meta">
         <span id="pack-name" class="pack-name">Morning Mist</span>
         <span id="level-name" class="level-name">Level 1 (5×5)</span>
+        <span class="level-caption">Tap a number to trace its sightline.</span>
       </div>
       <div class="level-stats">
         <div class="stat-item" title="Clues satisfied">
@@ -52,6 +53,14 @@
       </div>
     </div>
 
+    <aside class="play-note" aria-label="Puzzle reminder">
+      <span class="play-note-icon" aria-hidden="true">石</span>
+      <div class="play-note-copy">
+        <span class="play-note-kicker">THE GARDEN RULE</span>
+        <p><strong>Stones never share an edge.</strong> Keep every white cell connected.</p>
+      </div>
+    </aside>
+
     <!-- Main Game Board Container -->
     <main class="board-area">
       <div class="board-card">
@@ -63,16 +72,16 @@
 
     <!-- Mode Selector & Controls Toolbar -->
     <div class="controls-toolbar">
-      <div class="tool-modes">
-        <button id="tool-cycle" class="tool-btn active" title="Cycle Mode: Tap cycles Empty → Stone → Dot → Empty">
+      <div class="tool-modes" role="group" aria-label="Cell marking mode">
+        <button id="tool-cycle" class="tool-btn active" aria-pressed="true" title="Cycle Mode: Tap cycles Empty → Stone → Dot → Empty">
           <span class="tool-icon">🔄</span>
           <span class="tool-text">Cycle</span>
         </button>
-        <button id="tool-stone" class="tool-btn" title="Stone Mode: Tap marks Black Stone">
+        <button id="tool-stone" class="tool-btn" aria-pressed="false" title="Stone Mode: Tap marks Black Stone">
           <span class="tool-icon stone-icon">●</span>
           <span class="tool-text">Stone</span>
         </button>
-        <button id="tool-dot" class="tool-btn" title="Dot Mode: Tap marks White Dot">
+        <button id="tool-dot" class="tool-btn" aria-pressed="false" title="Dot Mode: Tap marks White Dot">
           <span class="tool-icon dot-icon">·</span>
           <span class="tool-text">Dot</span>
         </button>

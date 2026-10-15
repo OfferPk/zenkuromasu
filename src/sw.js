@@ -1,4 +1,4 @@
-const CACHE_NAME = 'zenkuromasu-v1';
+const CACHE_NAME = 'zenkuromasu-ui-v2';
 const ASSETS = [
   './',
   './index.html',

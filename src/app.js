@@ -202,10 +202,12 @@
 
   function setToolMode(mode) {
     toolMode = mode;
-    [elToolCycle, elToolStone, elToolDot].forEach(btn => btn && btn.classList.remove('active'));
-    if (mode === 'cycle' && elToolCycle) elToolCycle.classList.add('active');
-    if (mode === 'stone' && elToolStone) elToolStone.classList.add('active');
-    if (mode === 'dot' && elToolDot) elToolDot.classList.add('active');
+    [[elToolCycle, 'cycle'], [elToolStone, 'stone'], [elToolDot, 'dot']].forEach(([btn, tool]) => {
+      if (!btn) return;
+      const isActive = tool === mode;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-pressed', String(isActive));
+    });
   }
 
   // Cell Interaction
